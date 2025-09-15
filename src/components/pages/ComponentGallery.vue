@@ -295,7 +295,7 @@
       </div>
     </section>
 
-    <!-- Molecules セクションを追加 -->
+    <!-- Molecules -->
     <section class="gallery-section">
       <h2>Molecules</h2>
 
@@ -423,6 +423,232 @@
           </ContactInfo>
         </div>
       </div>
+
+      <!-- スワイプカード -->
+      <div class="component-demo">
+        <h3>SwipeCard</h3>
+        <div class="demo-area" style="height: 400px; position: relative; overflow: hidden">
+          <!-- 単体のスワイプカード -->
+          <div style="position: relative; width: 300px; height: 350px; margin: 0 auto">
+            <SwipeCard
+              v-if="!singleCardSwiped"
+              @swipe="handleSingleSwipe"
+              @swiping="handleSwiping"
+              @cancel="handleSwipeCancel"
+              ref="singleSwipeCard"
+            >
+              <div
+                style="
+                  height: 100%;
+                  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                  border-radius: 16px;
+                  padding: 20px;
+                  color: white;
+                "
+              >
+                <BaseHeading tag="h3" style="color: white">スワイプしてみて！</BaseHeading>
+                <p>左右にドラッグしてスワイプできます</p>
+                <div style="margin-top: auto">
+                  <p>👈 左: NOPE</p>
+                  <p>👉 右: LIKE</p>
+                </div>
+              </div>
+            </SwipeCard>
+
+            <div v-else style="text-align: center; padding: 40px">
+              <p>スワイプ方向: {{ lastSwipeDirection === 'left' ? '👈 NOPE' : '👉 LIKE' }}</p>
+              <BaseButton @click="resetSingleCard" variant="primary" style="margin-top: 20px">
+                もう一度
+              </BaseButton>
+            </div>
+          </div>
+
+          <!-- スワイプ進捗表示 -->
+          <div v-if="swipeProgress > 0" style="text-align: center; margin-top: 20px">
+            <BaseProgressBar :value="swipeProgress * 100" label="スワイプ進捗" show-value />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Organismsセクション-->
+    <section class="gallery-section">
+      <h2>Organisms</h2>
+
+      <!-- スワイプカード -->
+      <div class="component-demo">
+        <h3>SwipeCard & SwipeableCardStack</h3>
+        <div class="demo-area" style="height: 600px; position: relative">
+          <SwipeableCardStack
+            :cards="demoCards"
+            @like="handleCardLike"
+            @nope="handleCardNope"
+            @superlike="handleCardSuperlike"
+          >
+            <template #default="{ card }">
+              <div style="height: 100%; display: flex; flex-direction: column; padding: 20px">
+                <BaseAvatar :name="card.name" size="xlarge" style="margin: 0 auto 20px" />
+                <BaseHeading tag="h3" align="center">{{ card.name }}</BaseHeading>
+                <p style="text-align: center; color: #666">{{ card.title }}</p>
+                <BaseDivider />
+                <p>{{ card.bio }}</p>
+                <div style="margin-top: auto; display: flex; gap: 8px; flex-wrap: wrap">
+                  <BaseTag v-for="skill in card.skills" :key="skill" size="small">
+                    {{ skill }}
+                  </BaseTag>
+                </div>
+              </div>
+            </template>
+            <template #empty>
+              <div style="text-align: center; padding: 40px">
+                <BaseIcon icon="🎊" size="xlarge" />
+                <BaseHeading tag="h3">全てのカードを確認しました！</BaseHeading>
+                <p>素晴らしいマッチングでした</p>
+              </div>
+            </template>
+          </SwipeableCardStack>
+        </div>
+      </div>
+
+      <!-- スワイプ可能なカードスタック -->
+      <div class="component-demo">
+        <h3>SwipeableCardStack</h3>
+
+        <!-- 基本的な使い方 -->
+        <div class="demo-area" style="flex-direction: column">
+          <h4>基本的なカードスタック</h4>
+          <div style="height: 600px; position: relative; background: #f5f5f5; border-radius: 8px">
+            <SwipeableCardStack
+              :cards="demoCards"
+              :visible-count="3"
+              @like="handleCardLike"
+              @nope="handleCardNope"
+              @superlike="handleCardSuperlike"
+              @rewind="handleCardRewind"
+            >
+              <template #default="{ card }">
+                <div
+                  style="
+                    height: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    padding: 20px;
+                    background: white;
+                  "
+                >
+                  <BaseAvatar :name="card.name" size="xlarge" style="margin: 0 auto 20px" />
+                  <BaseHeading tag="h3" align="center">{{ card.name }}</BaseHeading>
+                  <p style="text-align: center; color: #666">{{ card.title }}</p>
+                  <BaseDivider />
+                  <p style="flex: 1">{{ card.bio }}</p>
+                  <div style="display: flex; gap: 8px; flex-wrap: wrap">
+                    <BaseTag
+                      v-for="skill in card.skills"
+                      :key="skill"
+                      size="small"
+                      variant="primary"
+                    >
+                      {{ skill }}
+                    </BaseTag>
+                  </div>
+                </div>
+              </template>
+              <template #empty>
+                <div style="text-align: center; padding: 40px">
+                  <BaseIcon icon="🎊" size="xlarge" />
+                  <BaseHeading tag="h3">全てのカードを確認しました！</BaseHeading>
+                  <p>素晴らしいマッチングでした</p>
+                  <BaseButton @click="resetCards" variant="primary" style="margin-top: 20px">
+                    最初から見る
+                  </BaseButton>
+                </div>
+              </template>
+            </SwipeableCardStack>
+          </div>
+
+          <!-- アクションログ -->
+          <div style="margin-top: 20px; padding: 16px; background: #f8f9fa; border-radius: 8px">
+            <h4 style="margin-top: 0">アクションログ</h4>
+            <div style="max-height: 100px; overflow-y: auto">
+              <p
+                v-for="(log, index) in actionLogs"
+                :key="index"
+                style="margin: 4px 0; font-size: 14px"
+              >
+                {{ log }}
+              </p>
+              <p v-if="actionLogs.length === 0" style="color: #999; font-size: 14px">
+                カードをスワイプするとここにログが表示されます
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- カスタマイズ例 -->
+        <div class="demo-area" style="flex-direction: column; margin-top: 40px">
+          <h4>アクションボタンなしバージョン</h4>
+          <div style="height: 400px; position: relative; background: #f5f5f5; border-radius: 8px">
+            <SwipeableCardStack
+              :cards="miniCards"
+              :visible-count="2"
+              :show-actions="false"
+              @swipe="handleMiniSwipe"
+            >
+              <template #default="{ card }">
+                <div
+                  style="
+                    height: 100%;
+                    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+                    border-radius: 16px;
+                    padding: 30px;
+                    color: white;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                  "
+                >
+                  <div style="text-align: center">
+                    <BaseIcon :icon="card.icon" size="xlarge" style="margin-bottom: 16px" />
+                    <BaseHeading tag="h3" style="color: white">{{ card.name }}</BaseHeading>
+                    <p>{{ card.description }}</p>
+                  </div>
+                </div>
+              </template>
+            </SwipeableCardStack>
+          </div>
+        </div>
+      </div>
+
+      <!-- ログインフォーム -->
+      <div class="component-demo">
+        <h3>SecretLoginForm</h3>
+        <div class="demo-area" style="background-color: #f5f5f5; padding: 40px">
+          <!-- 基本的なログインフォーム -->
+          <SecretLoginForm
+            @submit="handleLoginSubmit"
+            @success="handleLoginSuccess"
+            @error="handleLoginError"
+          />
+
+          <!-- カスタマイズされたフォーム -->
+          <SecretLoginForm
+            title="採用担当者様専用"
+            subtitle="詳細なプロフィールを閲覧するには認証が必要です"
+            submit-text="アクセスする"
+            :show-email-field="true"
+            :show-hint="true"
+            hint="パスワード: demo123"
+            :max-attempts="3"
+            style="margin-top: 40px"
+          >
+            <template #footer>
+              <p style="margin: 0; font-size: 14px; color: #666">
+                パスワードをお忘れの方は<a href="#" style="color: #007bff">こちら</a>
+              </p>
+            </template>
+          </SecretLoginForm>
+        </div>
+      </div>
     </section>
   </div>
 </template>
@@ -442,6 +668,9 @@ import ProfileHeader from '@/components/molecules/ProfileHeader.vue'
 import BaseModal from '@/components/atoms/BaseModal.vue'
 import SkillItem from '@/components/molecules/SkillItem.vue'
 import ContactInfo from '@/components/molecules/ContactInfo.vue'
+import SwipeCard from '@/components/molecules/SwipeCard.vue'
+import SwipeableCardStack from '@/components/organisms/SwipeableCardStack.vue'
+import SecretLoginForm from '@/components/organisms/SecretLoginForm.vue'
 
 const inputDemo = ref('')
 const inputDemo2 = ref('')
@@ -453,6 +682,12 @@ const showModal2 = ref(false)
 const showModal3 = ref(false)
 const showModal4 = ref(false)
 const modalInputDemo = ref('')
+
+// SwipeCard用の状態
+const singleCardSwiped = ref(false)
+const lastSwipeDirection = ref<'left' | 'right'>('right')
+const swipeProgress = ref(0)
+const singleSwipeCard = ref()
 
 const handleRemove = () => {
   console.log('Tag removed')
@@ -468,6 +703,124 @@ const handleAvatarClick = () => {
 
 const handleIconClick = () => {
   console.log('Icon clicked')
+}
+
+const handleSwiping = (progress: number) => {
+  swipeProgress.value = progress
+}
+
+const handleSwipeCancel = () => {
+  swipeProgress.value = 0
+  console.log('Swipe cancelled')
+}
+
+const resetSingleCard = () => {
+  singleCardSwiped.value = false
+  swipeProgress.value = 0
+}
+
+// SwipeCard用のハンドラー
+const handleSingleSwipe = (direction: 'left' | 'right') => {
+  singleCardSwiped.value = true
+  lastSwipeDirection.value = direction
+  swipeProgress.value = 0
+}
+
+// デモ用データ
+const demoCards = ref([
+  {
+    id: 1,
+    name: 'Vue.js',
+    title: 'Progressive Framework',
+    bio: '段階的に採用可能なフレームワーク。あなたのプロジェクトに最適です。',
+    skills: ['Reactive', 'Component-based', 'TypeScript'],
+  },
+  {
+    id: 2,
+    name: 'React',
+    title: 'UI Library',
+    bio: 'Facebookが開発した人気のUIライブラリ。大規模アプリケーションに最適。',
+    skills: ['JSX', 'Virtual DOM', 'Hooks'],
+  },
+  {
+    id: 3,
+    name: 'Node.js',
+    title: 'JavaScript Runtime',
+    bio: 'サーバーサイドJavaScript。フルスタック開発を実現します。',
+    skills: ['Async', 'NPM', 'Express'],
+  },
+])
+
+// アクションログ
+const actionLogs = ref<string[]>([])
+
+// SwipeableCardStack用の追加データ
+const miniCards = ref([
+  {
+    id: 1,
+    name: 'Design',
+    icon: '🎨',
+    description: 'Beautiful UI/UX',
+  },
+  {
+    id: 2,
+    name: 'Code',
+    icon: '💻',
+    description: 'Clean & Efficient',
+  },
+  {
+    id: 3,
+    name: 'Deploy',
+    icon: '🚀',
+    description: 'Fast & Reliable',
+  },
+])
+
+// カードアクション
+const handleCardLike = (card: any) => {
+  actionLogs.value.unshift(`💚 Liked: ${card.name}`)
+  if (actionLogs.value.length > 10) actionLogs.value.pop()
+}
+
+const handleCardNope = (card: any) => {
+  actionLogs.value.unshift(`❌ Noped: ${card.name}`)
+  if (actionLogs.value.length > 10) actionLogs.value.pop()
+}
+
+const handleCardSuperlike = (card: any) => {
+  actionLogs.value.unshift(`⭐ Superliked: ${card.name}`)
+  if (actionLogs.value.length > 10) actionLogs.value.pop()
+}
+
+const handleCardRewind = (card: any) => {
+  actionLogs.value.unshift(`↩️ Rewind: ${card.name}`)
+  if (actionLogs.value.length > 10) actionLogs.value.pop()
+}
+
+const handleMiniSwipe = (card: any, direction: 'left' | 'right') => {
+  console.log(`Mini card swiped ${direction}:`, card.name)
+}
+
+// カードをリセット
+const resetCards = () => {
+  // SwipeableCardStackを再レンダリングするため、
+  // 実際の実装では currentIndex をリセットする
+  actionLogs.value = []
+  window.location.reload() // 簡易的なリセット
+}
+
+// ログインフォーム
+const handleLoginSubmit = (data: any) => {
+  console.log('Login attempt:', data)
+}
+
+const handleLoginSuccess = (data: any) => {
+  console.log('Login success:', data)
+  alert('ログイン成功！')
+}
+
+const handleLoginError = (error: string) => {
+  console.error('Login error:', error)
 }
 </script>
 
