@@ -11,7 +11,7 @@
       </BaseButton>
     </div>
 
-    <h1><BaseIcon icon="⭐" size="large" />コンポーネントギャラリー</h1>
+    <h1><BaseIcon icon="🖼" size="large" /> コンポーネントギャラリー</h1>
 
     <!-- Atoms -->
     <section class="gallery-section">
