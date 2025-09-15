@@ -16,7 +16,7 @@
   >
     <span v-if="loading" class="button__loader">
       <!-- TODO:シンプルなローディング表示 -->
-      ⟳
+      /
     </span>
     <span class="button__content">
       <slot />

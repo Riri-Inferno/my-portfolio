@@ -43,6 +43,63 @@
           <BaseTag clickable @click="handleTagClick">Clickable</BaseTag>
         </div>
       </div>
+
+      <!-- アバター -->
+      <div class="component-demo">
+        <h3>BaseAvatar</h3>
+        <div class="demo-area">
+          <!-- 画像あり -->
+          <BaseAvatar src="https://via.placeholder.com/150" alt="User avatar" />
+
+          <!-- 名前からイニシャル生成 -->
+          <BaseAvatar name="山田 太郎" />
+          <BaseAvatar name="Tanaka" variant="square" />
+
+          <!-- サイズバリエーション -->
+          <BaseAvatar name="S" size="small" />
+          <BaseAvatar name="M" size="medium" />
+          <BaseAvatar name="L" size="large" />
+          <BaseAvatar name="XL" size="xlarge" />
+
+          <!-- ステータス付き -->
+          <BaseAvatar name="ON" status="online" />
+          <BaseAvatar name="OFF" status="offline" />
+          <BaseAvatar name="BUSY" status="busy" />
+          <BaseAvatar name="AWAY" status="away" />
+
+          <!-- クリック可能 -->
+          <BaseAvatar name="Click" clickable @click="handleAvatarClick" />
+        </div>
+      </div>
+
+      <!-- アイコン -->
+      <div class="component-demo">
+        <h3>BaseIcon</h3>
+        <div class="demo-area">
+          <!-- 基本的な使い方（絵文字） -->
+          <BaseIcon icon="🏠" />
+          <BaseIcon icon="💼" />
+          <BaseIcon icon="📧" />
+          <BaseIcon icon="⚙️" />
+
+          <!-- サイズバリエーション -->
+          <BaseIcon icon="⭐" size="small" />
+          <BaseIcon icon="⭐" size="medium" />
+          <BaseIcon icon="⭐" size="large" />
+          <BaseIcon icon="⭐" size="xlarge" />
+
+          <!-- カラー -->
+          <BaseIcon icon="❤️" color="#ff0000" />
+          <BaseIcon icon="💚" color="#00ff00" />
+          <BaseIcon icon="💙" color="#0000ff" />
+
+          <!-- 回転 -->
+          <BaseIcon icon="⟳" spin />
+
+          <!-- クリック可能 -->
+          <BaseIcon icon="👍" clickable size="large" @click="handleIconClick" />
+        </div>
+      </div>
     </section>
   </div>
 </template>
@@ -52,6 +109,8 @@ import { ref } from 'vue'
 import BaseButton from '@/components/atoms/BaseButton.vue'
 import BaseInput from '@/components/atoms/BaseInput.vue'
 import BaseTag from '../atoms/BaseTag.vue'
+import BaseAvatar from '@/components/atoms/BaseAvatar.vue'
+import BaseIcon from '@/components/atoms/BaseIcon.vue'
 
 const inputDemo = ref('')
 const inputDemo2 = ref('')
@@ -63,6 +122,14 @@ const handleRemove = () => {
 
 const handleTagClick = () => {
   console.log('Tag clicked')
+}
+
+const handleAvatarClick = () => {
+  console.log('Avatar clicked')
+}
+
+const handleIconClick = () => {
+  console.log('Icon clicked')
 }
 </script>
 
