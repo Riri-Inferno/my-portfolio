@@ -13,7 +13,7 @@
   >
     <slot />
     <button v-if="removable" class="tag__remove" @click.stop="handleRemove" aria-label="Remove tag">
-      ×
+      ☓
     </button>
   </span>
 </template>
