@@ -671,8 +671,11 @@ import ContactInfo from '@/components/molecules/ContactInfo.vue'
 import SwipeCard from '@/components/molecules/SwipeCard.vue'
 import SwipeableCardStack from '@/components/organisms/SwipeableCardStack.vue'
 import SecretLoginForm from '@/components/organisms/SecretLoginForm.vue'
+import type { Card } from '@/components/organisms/SwipeableCardStack.vue'
+import type { LoginFormData } from '@/components/organisms/SecretLoginForm.vue'
 
 const inputDemo = ref('')
+
 const inputDemo2 = ref('')
 const inputDemo3 = ref('')
 
@@ -777,27 +780,27 @@ const miniCards = ref([
 ])
 
 // カードアクション
-const handleCardLike = (card: any) => {
+const handleCardLike = (card: Card) => {
   actionLogs.value.unshift(`💚 Liked: ${card.name}`)
   if (actionLogs.value.length > 10) actionLogs.value.pop()
 }
 
-const handleCardNope = (card: any) => {
+const handleCardNope = (card: Card) => {
   actionLogs.value.unshift(`❌ Noped: ${card.name}`)
   if (actionLogs.value.length > 10) actionLogs.value.pop()
 }
 
-const handleCardSuperlike = (card: any) => {
+const handleCardSuperlike = (card: Card) => {
   actionLogs.value.unshift(`⭐ Superliked: ${card.name}`)
   if (actionLogs.value.length > 10) actionLogs.value.pop()
 }
 
-const handleCardRewind = (card: any) => {
+const handleCardRewind = (card: Card) => {
   actionLogs.value.unshift(`↩️ Rewind: ${card.name}`)
   if (actionLogs.value.length > 10) actionLogs.value.pop()
 }
 
-const handleMiniSwipe = (card: any, direction: 'left' | 'right') => {
+const handleMiniSwipe = (card: Card, direction: 'left' | 'right') => {
   console.log(`Mini card swiped ${direction}:`, card.name)
 }
 
@@ -810,11 +813,11 @@ const resetCards = () => {
 }
 
 // ログインフォーム
-const handleLoginSubmit = (data: any) => {
+const handleLoginSubmit = (data: LoginFormData) => {
   console.log('Login attempt:', data)
 }
 
-const handleLoginSuccess = (data: any) => {
+const handleLoginSuccess = (data: LoginFormData) => {
   console.log('Login success:', data)
   alert('ログイン成功！')
 }

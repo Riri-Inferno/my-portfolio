@@ -70,7 +70,12 @@ import BaseIcon from '@/components/atoms/BaseIcon.vue'
 
 export interface Card {
   id: string | number
-  [key: string]: unknown
+  name: string
+  title?: string
+  bio?: string
+  skills?: string[]
+  icon?: string
+  description?: string
 }
 
 interface SwipeHistory {
