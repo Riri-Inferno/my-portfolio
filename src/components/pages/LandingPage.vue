@@ -1,11 +1,15 @@
-<script setup lang="ts"></script>
-
 <template>
-  <h1>hello-new-pj</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+  <h1>トップページ(作業中)</h1>
+  <BaseButton :loading="isLoading" @click="handleClick">Click me</BaseButton>
 </template>
 
-<style scoped></style>
+<script setup lang="ts">
+import BaseButton from '@/components/atoms/BaseButton.vue'
+import { ref } from 'vue'
+
+const isLoading = ref(false)
+
+const handleClick = () => {
+  console.log('Button clicked!')
+}
+</script>
