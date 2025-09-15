@@ -252,6 +252,66 @@
         </div>
       </div>
     </section>
+
+    <!-- Molecules セクションを追加 -->
+    <section class="gallery-section">
+      <h2>Molecules</h2>
+
+      <!-- プロフィールヘッダー -->
+      <div class="component-demo">
+        <h3>ProfileHeader</h3>
+        <div class="demo-area" style="flex-direction: column; align-items: stretch">
+          <!-- 基本的な使い方 -->
+          <ProfileHeader
+            name="山田 太郎"
+            title="フルスタックエンジニア"
+            location="東京, 日本"
+            :age="28"
+            avatar-url="https://via.placeholder.com/150"
+          />
+
+          <!-- タグ付き -->
+          <ProfileHeader
+            name="鈴木 花子"
+            title="UI/UXデザイナー"
+            location="大阪, 日本"
+            :tags="['Figma', 'React', 'TypeScript']"
+            status="online"
+            verified
+          />
+
+          <!-- アクションボタン付き -->
+          <ProfileHeader
+            name="佐藤 次郎"
+            title="バックエンドエンジニア"
+            location="福岡, 日本"
+            :age="32"
+            :tags="['Node.js', 'Python', 'AWS']"
+            status="busy"
+          >
+            <template #actions>
+              <BaseButton size="small" variant="primary">フォロー</BaseButton>
+              <BaseButton size="small" variant="ghost">メッセージ</BaseButton>
+            </template>
+          </ProfileHeader>
+
+          <!-- エクストラコンテンツ付き -->
+          <ProfileHeader
+            name="田中 美咲"
+            title="プロダクトマネージャー"
+            location="名古屋, 日本"
+            verified
+          >
+            <template #extra>
+              <div style="text-align: right">
+                <p style="margin: 0; color: #666; font-size: 14px">マッチ率</p>
+                <p style="margin: 0; font-size: 32px; font-weight: bold; color: #28a745">85%</p>
+              </div>
+            </template>
+          </ProfileHeader>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -266,6 +326,7 @@ import BaseBadge from '@/components/atoms/BaseBadge.vue'
 import BaseProgressBar from '@/components/atoms/BaseProgressBar.vue'
 import BaseHeading from '@/components/atoms/BaseHeading.vue'
 import BaseDivider from '@/components/atoms/BaseDivider.vue'
+import ProfileHeader from '@/components/molecules/ProfileHeader.vue'
 
 const inputDemo = ref('')
 const inputDemo2 = ref('')
