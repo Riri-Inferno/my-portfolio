@@ -68,7 +68,7 @@ import SwipeCard from '@/components/molecules/SwipeCard.vue'
 import BaseButton from '@/components/atoms/BaseButton.vue'
 import BaseIcon from '@/components/atoms/BaseIcon.vue'
 
-interface Card {
+export interface Card {
   id: string | number
   [key: string]: unknown
 }

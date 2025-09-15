@@ -62,7 +62,7 @@ import BaseHeading from '@/components/atoms/BaseHeading.vue'
 import BaseInput from '@/components/atoms/BaseInput.vue'
 import BaseButton from '@/components/atoms/BaseButton.vue'
 
-interface LoginFormData {
+export interface LoginFormData {
   password: string
   email: string
 }
