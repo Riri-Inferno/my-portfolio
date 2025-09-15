@@ -184,6 +184,73 @@
           />
         </div>
       </div>
+
+      <!-- 見出し -->
+      <div class="component-demo">
+        <h3>BaseHeading</h3>
+        <div class="demo-area" style="flex-direction: column; align-items: stretch">
+          <!-- 各見出しレベル -->
+          <BaseHeading tag="h1">見出しレベル1</BaseHeading>
+          <BaseHeading tag="h2">見出しレベル2</BaseHeading>
+          <BaseHeading tag="h3">見出しレベル3</BaseHeading>
+          <BaseHeading tag="h4">見出しレベル4</BaseHeading>
+          <BaseHeading tag="h5">見出しレベル5</BaseHeading>
+          <BaseHeading tag="h6">見出しレベル6</BaseHeading>
+
+          <!-- サブタイトル付き -->
+          <BaseHeading tag="h2" subtitle="This is a subtitle"> メインタイトル </BaseHeading>
+
+          <!-- 中央揃え -->
+          <BaseHeading tag="h3" align="center"> 中央揃えの見出し </BaseHeading>
+
+          <!-- 大文字変換 -->
+          <BaseHeading tag="h4" uppercase> Uppercase Heading </BaseHeading>
+
+          <!-- マージンなし -->
+          <BaseHeading tag="h3" no-margin> マージンなしの見出し </BaseHeading>
+        </div>
+      </div>
+
+      <!-- 区切り線 -->
+      <div class="component-demo">
+        <h3>BaseDivider</h3>
+        <div class="demo-area" style="flex-direction: column; align-items: stretch; gap: 0">
+          <!-- 基本的な区切り線 -->
+          <BaseDivider />
+
+          <!-- テキスト付き -->
+          <BaseDivider text="または" />
+
+          <!-- 破線 -->
+          <BaseDivider variant="dashed" />
+
+          <!-- 点線 -->
+          <BaseDivider variant="dotted" text="Section" />
+
+          <!-- カスタムカラー -->
+          <BaseDivider color="#007bff" :thickness="2" />
+
+          <!-- テキスト位置 -->
+          <BaseDivider text="左寄せ" text-position="left" />
+          <BaseDivider text="中央" text-position="center" />
+          <BaseDivider text="右寄せ" text-position="right" />
+
+          <!-- カスタムスペーシング -->
+          <BaseDivider :spacing="32" text="大きなスペース" />
+
+          <!-- スロット使用 -->
+          <BaseDivider>
+            <BaseIcon icon="⭐" />
+          </BaseDivider>
+
+          <!-- 垂直方向（デモ用コンテナ内） -->
+          <div style="display: flex; height: 100px; align-items: center; gap: 16px">
+            <span>左側</span>
+            <BaseDivider orientation="vertical" />
+            <span>右側</span>
+          </div>
+        </div>
+      </div>
     </section>
   </div>
 </template>
@@ -197,6 +264,8 @@ import BaseAvatar from '@/components/atoms/BaseAvatar.vue'
 import BaseIcon from '@/components/atoms/BaseIcon.vue'
 import BaseBadge from '@/components/atoms/BaseBadge.vue'
 import BaseProgressBar from '@/components/atoms/BaseProgressBar.vue'
+import BaseHeading from '@/components/atoms/BaseHeading.vue'
+import BaseDivider from '@/components/atoms/BaseDivider.vue'
 
 const inputDemo = ref('')
 const inputDemo2 = ref('')
