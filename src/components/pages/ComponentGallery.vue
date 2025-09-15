@@ -353,6 +353,76 @@
           </ProfileHeader>
         </div>
       </div>
+
+      <!-- スキルアイテム -->
+      <div class="component-demo">
+        <h3>SkillItem</h3>
+        <div class="demo-area" style="flex-direction: column; align-items: stretch; gap: 16px">
+          <!-- 基本的な使い方 -->
+          <SkillItem name="Vue.js" icon="💚" level="advanced" experience="3年" />
+
+          <!-- 説明付き -->
+          <SkillItem
+            name="TypeScript"
+            icon="🔷"
+            level="intermediate"
+            experience="2年"
+            description="型安全なJavaScriptの開発経験。Vue3のComposition APIと組み合わせて使用。"
+          />
+
+          <!-- サブスキル付き -->
+          <SkillItem
+            name="React"
+            icon="⚛️"
+            level="expert"
+            experience="5年"
+            description="大規模SPAの開発経験あり"
+            :sub-skills="['Next.js', 'Redux', 'React Hook Form', 'Styled Components']"
+          />
+
+          <!-- カスタムプログレス -->
+          <SkillItem
+            name="Node.js"
+            icon="🟢"
+            experience="4年"
+            :custom-progress="85"
+            :sub-skills="['Express', 'NestJS', 'Prisma']"
+          />
+        </div>
+      </div>
+
+      <!-- 連絡先情報 -->
+      <div class="component-demo">
+        <h3>ContactInfo</h3>
+        <div class="demo-area" style="flex-direction: column; align-items: stretch">
+          <!-- 基本的な使い方 -->
+          <ContactInfo
+            title="連絡先"
+            email="example@email.com"
+            phone="090-1234-5678"
+            location="東京都渋谷区"
+          />
+
+          <!-- ウェブサイト・SNS付き -->
+          <ContactInfo
+            email="developer@example.com"
+            website="https://example.com"
+            location="大阪府大阪市"
+            :social-links="[
+              { platform: 'GitHub', url: 'https://github.com/example', icon: '🐙' },
+              { platform: 'Twitter', url: 'https://twitter.com/example', icon: '🐦' },
+              { platform: 'LinkedIn', url: 'https://linkedin.com/in/example', icon: '💼' },
+            ]"
+          />
+
+          <!-- エクストラコンテンツ付き -->
+          <ContactInfo title="お問い合わせ" email="contact@example.com">
+            <template #extra>
+              <BaseButton variant="primary" full-width> お問い合わせフォームへ </BaseButton>
+            </template>
+          </ContactInfo>
+        </div>
+      </div>
     </section>
   </div>
 </template>
@@ -370,6 +440,8 @@ import BaseHeading from '@/components/atoms/BaseHeading.vue'
 import BaseDivider from '@/components/atoms/BaseDivider.vue'
 import ProfileHeader from '@/components/molecules/ProfileHeader.vue'
 import BaseModal from '@/components/atoms/BaseModal.vue'
+import SkillItem from '@/components/molecules/SkillItem.vue'
+import ContactInfo from '@/components/molecules/ContactInfo.vue'
 
 const inputDemo = ref('')
 const inputDemo2 = ref('')
