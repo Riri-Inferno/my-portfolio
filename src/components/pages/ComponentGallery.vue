@@ -1,5 +1,16 @@
 <template>
   <div class="component-gallery">
+    <!-- トップページに戻るボタン（固定表示） -->
+    <div class="back-to-top-button">
+      <BaseButton
+        variant="primary"
+        @click="$router.push('/')"
+        style="box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15)"
+      >
+        <BaseIcon icon="🏠" /> トップページへ
+      </BaseButton>
+    </div>
+
     <h1><BaseIcon icon="⭐" size="large" />コンポーネントギャラリー</h1>
 
     <!-- Atoms -->
@@ -471,7 +482,7 @@
       </div>
     </section>
 
-    <!-- Organismsセクション-->
+    <!-- Organisms-->
     <section class="gallery-section">
       <h2>Organisms</h2>
 
@@ -861,6 +872,7 @@ const handleLoginError = (error: string) => {
   padding: 20px;
   max-width: 1200px;
   margin: 0 auto;
+  position: relative;
 }
 
 .gallery-section {
@@ -889,5 +901,24 @@ const handleLoginError = (error: string) => {
   padding: 20px;
   background-color: #f8f9fa;
   border-radius: 8px;
+}
+
+.back-to-top-button {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+
+  // モバイル
+  @media (max-width: 768px) {
+    top: 10px;
+    right: 10px;
+
+    // モバイルではボタンを少し小さくする
+    :deep(.base-button) {
+      padding: 8px 16px;
+      font-size: 14px;
+    }
+  }
 }
 </style>
