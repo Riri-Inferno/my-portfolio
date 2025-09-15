@@ -787,6 +787,20 @@ const demoCards = ref<DemoCard[]>([
     bio: 'サーバーサイドJavaScript。フルスタック開発を実現します。',
     skills: ['Async', 'NPM', 'Express'],
   },
+  {
+    id: 4,
+    name: 'C#',
+    title: 'King of Backend',
+    bio: 'APIサーバーサイドの鉄板。初心者向け',
+    skills: ['Async', 'NPM', 'Express'],
+  },
+  {
+    id: 5,
+    name: 'TypeScript',
+    title: 'チーム開発向けのAltJS',
+    bio: '理解している人たちで一緒に使えば最強の型付Jsです。理解しているならね。。。',
+    skills: ['Async', 'NPM', 'Express'],
+  },
 ])
 
 // アクションログ
