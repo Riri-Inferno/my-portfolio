@@ -251,6 +251,48 @@
           </div>
         </div>
       </div>
+
+      <div class="component-demo">
+        <h3>BaseModal</h3>
+        <div class="demo-area">
+          <!-- 基本的なモーダル -->
+          <BaseButton @click="showModal1 = true"> 基本モーダルを開く </BaseButton>
+
+          <!-- サイズ違い -->
+          <BaseButton variant="secondary" @click="showModal2 = true"> 小さいモーダル </BaseButton>
+
+          <BaseButton variant="success" @click="showModal3 = true"> 大きいモーダル </BaseButton>
+
+          <!-- フッター付き -->
+          <BaseButton variant="warning" @click="showModal4 = true">
+            フッター付きモーダル
+          </BaseButton>
+        </div>
+
+        <!-- モーダル本体 -->
+        <BaseModal v-model="showModal1" title="基本的なモーダル">
+          <p>これは基本的なモーダルの内容です。</p>
+          <p>ESCキーまたはオーバーレイクリックで閉じることができます。</p>
+        </BaseModal>
+
+        <BaseModal v-model="showModal2" title="小さいモーダル" size="small">
+          <p>これは小さいサイズのモーダルです。</p>
+        </BaseModal>
+
+        <BaseModal v-model="showModal3" title="大きいモーダル" size="large">
+          <p>これは大きいサイズのモーダルです。</p>
+          <p>より多くのコンテンツを表示できます。</p>
+          <BaseInput label="名前" v-model="modalInputDemo" />
+        </BaseModal>
+
+        <BaseModal v-model="showModal4" title="確認" :close-on-overlay="false">
+          <p>本当に削除しますか？この操作は取り消せません。</p>
+          <template #footer>
+            <BaseButton variant="ghost" @click="showModal4 = false"> キャンセル </BaseButton>
+            <BaseButton variant="danger" @click="showModal4 = false"> 削除する </BaseButton>
+          </template>
+        </BaseModal>
+      </div>
     </section>
 
     <!-- Molecules セクションを追加 -->
@@ -327,10 +369,18 @@ import BaseProgressBar from '@/components/atoms/BaseProgressBar.vue'
 import BaseHeading from '@/components/atoms/BaseHeading.vue'
 import BaseDivider from '@/components/atoms/BaseDivider.vue'
 import ProfileHeader from '@/components/molecules/ProfileHeader.vue'
+import BaseModal from '@/components/atoms/BaseModal.vue'
 
 const inputDemo = ref('')
 const inputDemo2 = ref('')
 const inputDemo3 = ref('')
+
+// モーダル用の状態
+const showModal1 = ref(false)
+const showModal2 = ref(false)
+const showModal3 = ref(false)
+const showModal4 = ref(false)
+const modalInputDemo = ref('')
 
 const handleRemove = () => {
   console.log('Tag removed')
