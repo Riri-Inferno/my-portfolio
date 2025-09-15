@@ -1,4 +1,3 @@
-<!-- src/components/pages/LandingPage.vue -->
 <template>
   <div class="landing-page">
     <h1>トップページ</h1>
