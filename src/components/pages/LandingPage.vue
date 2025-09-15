@@ -1,15 +1,42 @@
+<!-- src/components/pages/LandingPage.vue -->
 <template>
-  <h1>トップページ(作業中)</h1>
-  <BaseButton :loading="isLoading" @click="handleClick">Click me</BaseButton>
+  <div class="landing-page">
+    <h1>トップページ</h1>
+    <nav class="navigation">
+      <BaseButton @click="goToComponents"> コンポーネントギャラリーへ </BaseButton>
+    </nav>
+  </div>
 </template>
 
 <script setup lang="ts">
+import { useRouter } from 'vue-router'
 import BaseButton from '@/components/atoms/BaseButton.vue'
-import { ref } from 'vue'
 
-const isLoading = ref(false)
+const router = useRouter()
 
-const handleClick = () => {
-  console.log('Button clicked!')
+const goToComponents = () => {
+  router.push('/components')
 }
 </script>
+
+<style lang="scss" scoped>
+.landing-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+
+  h1 {
+    margin-bottom: 40px;
+    font-size: 48px;
+    color: #333;
+  }
+
+  .navigation {
+    display: flex;
+    gap: 20px;
+  }
+}
+</style>

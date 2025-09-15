@@ -9,6 +9,11 @@ const router = createRouter({
       name: 'landing',
       component: LandingPage,
     },
+    {
+      path: '/components',
+      name: 'components',
+      component: () => import('../components/pages/ComponentGallery.vue'),
+    },
   ],
 })
 
