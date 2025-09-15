@@ -261,10 +261,10 @@
           <!-- サイズ違い -->
           <BaseButton variant="secondary" @click="showModal2 = true"> 小さいモーダル </BaseButton>
 
-          <BaseButton variant="success" @click="showModal3 = true"> 大きいモーダル </BaseButton>
+          <BaseButton variant="ghost" @click="showModal3 = true"> 大きいモーダル </BaseButton>
 
           <!-- フッター付き -->
-          <BaseButton variant="warning" @click="showModal4 = true">
+          <BaseButton variant="danger" @click="showModal4 = true">
             フッター付きモーダル
           </BaseButton>
         </div>
