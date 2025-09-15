@@ -487,13 +487,17 @@
           >
             <template #default="{ card }">
               <div style="height: 100%; display: flex; flex-direction: column; padding: 20px">
-                <BaseAvatar :name="card.name" size="xlarge" style="margin: 0 auto 20px" />
-                <BaseHeading tag="h3" align="center">{{ card.name }}</BaseHeading>
-                <p style="text-align: center; color: #666">{{ card.title }}</p>
+                <BaseAvatar
+                  :name="(card as DemoCard).name"
+                  size="xlarge"
+                  style="margin: 0 auto 20px"
+                />
+                <BaseHeading tag="h3" align="center">{{ (card as DemoCard).name }}</BaseHeading>
+                <p style="text-align: center; color: #666">{{ (card as DemoCard).title }}</p>
                 <BaseDivider />
-                <p>{{ card.bio }}</p>
+                <p>{{ (card as DemoCard).bio }}</p>
                 <div style="margin-top: auto; display: flex; gap: 8px; flex-wrap: wrap">
-                  <BaseTag v-for="skill in card.skills" :key="skill" size="small">
+                  <BaseTag v-for="skill in (card as DemoCard).skills" :key="skill" size="small">
                     {{ skill }}
                   </BaseTag>
                 </div>
@@ -536,14 +540,18 @@
                     background: white;
                   "
                 >
-                  <BaseAvatar :name="card.name" size="xlarge" style="margin: 0 auto 20px" />
-                  <BaseHeading tag="h3" align="center">{{ card.name }}</BaseHeading>
-                  <p style="text-align: center; color: #666">{{ card.title }}</p>
+                  <BaseAvatar
+                    :name="(card as DemoCard).name"
+                    size="xlarge"
+                    style="margin: 0 auto 20px"
+                  />
+                  <BaseHeading tag="h3" align="center">{{ (card as DemoCard).name }}</BaseHeading>
+                  <p style="text-align: center; color: #666">{{ (card as DemoCard).title }}</p>
                   <BaseDivider />
-                  <p style="flex: 1">{{ card.bio }}</p>
+                  <p style="flex: 1">{{ (card as DemoCard).bio }}</p>
                   <div style="display: flex; gap: 8px; flex-wrap: wrap">
                     <BaseTag
-                      v-for="skill in card.skills"
+                      v-for="skill in (card as DemoCard).skills"
                       :key="skill"
                       size="small"
                       variant="primary"
@@ -608,9 +616,15 @@
                   "
                 >
                   <div style="text-align: center">
-                    <BaseIcon :icon="card.icon" size="xlarge" style="margin-bottom: 16px" />
-                    <BaseHeading tag="h3" style="color: white">{{ card.name }}</BaseHeading>
-                    <p>{{ card.description }}</p>
+                    <BaseIcon
+                      :icon="(card as DemoCard).icon"
+                      size="xlarge"
+                      style="margin-bottom: 16px"
+                    />
+                    <BaseHeading tag="h3" style="color: white">{{
+                      (card as DemoCard).name
+                    }}</BaseHeading>
+                    <p>{{ (card as DemoCard).description }}</p>
                   </div>
                 </div>
               </template>
@@ -671,8 +685,18 @@ import ContactInfo from '@/components/molecules/ContactInfo.vue'
 import SwipeCard from '@/components/molecules/SwipeCard.vue'
 import SwipeableCardStack from '@/components/organisms/SwipeableCardStack.vue'
 import SecretLoginForm from '@/components/organisms/SecretLoginForm.vue'
-import type { Card } from '@/components/organisms/SwipeableCardStack.vue'
+import type { BaseCard } from '@/components/organisms/SwipeableCardStack.vue'
 import type { LoginFormData } from '@/components/organisms/SecretLoginForm.vue'
+
+// デモ用のカード型
+interface DemoCard extends BaseCard {
+  name: string
+  title?: string
+  bio?: string
+  skills?: string[]
+  icon?: string
+  description?: string
+}
 
 const inputDemo = ref('')
 
@@ -730,7 +754,7 @@ const handleSingleSwipe = (direction: 'left' | 'right') => {
 }
 
 // デモ用データ
-const demoCards = ref([
+const demoCards = ref<DemoCard[]>([
   {
     id: 1,
     name: 'Vue.js',
@@ -758,7 +782,7 @@ const demoCards = ref([
 const actionLogs = ref<string[]>([])
 
 // SwipeableCardStack用の追加データ
-const miniCards = ref([
+const miniCards = ref<DemoCard[]>([
   {
     id: 1,
     name: 'Design',
@@ -780,28 +804,33 @@ const miniCards = ref([
 ])
 
 // カードアクション
-const handleCardLike = (card: Card) => {
-  actionLogs.value.unshift(`💚 Liked: ${card.name}`)
+const handleCardLike = (card: BaseCard) => {
+  const demoCard = card as DemoCard
+  actionLogs.value.unshift(`💚 Liked: ${demoCard.name}`)
   if (actionLogs.value.length > 10) actionLogs.value.pop()
 }
 
-const handleCardNope = (card: Card) => {
-  actionLogs.value.unshift(`❌ Noped: ${card.name}`)
+const handleCardNope = (card: BaseCard) => {
+  const demoCard = card as DemoCard
+  actionLogs.value.unshift(`❌ Noped: ${demoCard.name}`)
   if (actionLogs.value.length > 10) actionLogs.value.pop()
 }
 
-const handleCardSuperlike = (card: Card) => {
-  actionLogs.value.unshift(`⭐ Superliked: ${card.name}`)
+const handleCardSuperlike = (card: BaseCard) => {
+  const demoCard = card as DemoCard
+  actionLogs.value.unshift(`⭐ Superliked: ${demoCard.name}`)
   if (actionLogs.value.length > 10) actionLogs.value.pop()
 }
 
-const handleCardRewind = (card: Card) => {
-  actionLogs.value.unshift(`↩️ Rewind: ${card.name}`)
+const handleCardRewind = (card: BaseCard) => {
+  const demoCard = card as DemoCard
+  actionLogs.value.unshift(`↩️ Rewind: ${demoCard.name}`)
   if (actionLogs.value.length > 10) actionLogs.value.pop()
 }
 
-const handleMiniSwipe = (card: Card, direction: 'left' | 'right') => {
-  console.log(`Mini card swiped ${direction}:`, card.name)
+const handleMiniSwipe = (card: BaseCard, direction: 'left' | 'right') => {
+  const demoCard = card as DemoCard
+  console.log(`Mini card swiped ${direction}:`, demoCard.name)
 }
 
 // カードをリセット

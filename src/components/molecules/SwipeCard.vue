@@ -1,4 +1,3 @@
-<!-- src/components/molecules/SwipeCard.vue -->
 <template>
   <div
     ref="cardRef"

@@ -68,33 +68,32 @@ import SwipeCard from '@/components/molecules/SwipeCard.vue'
 import BaseButton from '@/components/atoms/BaseButton.vue'
 import BaseIcon from '@/components/atoms/BaseIcon.vue'
 
-export interface Card {
+// 最小限の型定義のみエクスポート
+export interface BaseCard {
   id: string | number
-  name: string
-  title?: string
-  bio?: string
-  skills?: string[]
-  icon?: string
-  description?: string
 }
 
-interface SwipeHistory {
-  card: Card
+// 内部で使用する型
+interface SwipeHistory<T extends BaseCard = BaseCard> {
+  card: T
   action: 'like' | 'nope' | 'superlike'
 }
 
-interface CardStackProps {
-  cards: Card[]
+// Props の型定義（ジェネリックを使用）
+interface CardStackProps<T extends BaseCard = BaseCard> {
+  cards: T[]
   visibleCount?: number
   showActions?: boolean
 }
 
-interface CardStackEmits {
-  (e: 'swipe', card: Card, direction: 'left' | 'right'): void
-  (e: 'like', card: Card): void
-  (e: 'nope', card: Card): void
-  (e: 'superlike', card: Card): void
-  (e: 'rewind', card: Card): void
+// Emits の型定義（ジェネリックを使用）
+interface CardStackEmits<T extends BaseCard = BaseCard> {
+  (e: 'swipe', card: T, direction: 'left' | 'right'): void
+  (e: 'like', card: T): void
+  (e: 'nope', card: T): void
+  (e: 'superlike', card: T): void
+  (e: 'rewind', card: T): void
+  (e: 'swiping', progress: number): void
 }
 
 const props = withDefaults(defineProps<CardStackProps>(), {
@@ -108,6 +107,7 @@ const currentIndex = ref(0)
 const history = ref<SwipeHistory[]>([])
 const swipeProgress = ref(0)
 
+// 表示するカードの計算
 const visibleCards = computed(() => {
   return props.cards.slice(currentIndex.value, currentIndex.value + props.visibleCount)
 })
@@ -123,7 +123,8 @@ const getCardStyle = (index: number) => {
   }
 }
 
-const handleSwipe = (card: Card, direction: 'left' | 'right') => {
+// スワイプ処理
+const handleSwipe = (card: BaseCard, direction: 'left' | 'right') => {
   const action = direction === 'right' ? 'like' : 'nope'
   history.value.push({ card, action })
   currentIndex.value++
@@ -136,8 +137,10 @@ const handleSwipe = (card: Card, direction: 'left' | 'right') => {
   }
 }
 
+// スワイプ中の処理
 const handleSwiping = (progress: number) => {
   swipeProgress.value = progress
+  emit('swiping', progress)
 }
 
 const handleLike = () => {
@@ -172,6 +175,14 @@ const handleRewind = () => {
     }
   }
 }
+
+// 外部から使用可能なメソッドを公開
+defineExpose({
+  currentIndex,
+  history,
+  swipeProgress,
+  handleRewind,
+})
 </script>
 
 <style lang="scss" scoped>
