@@ -219,7 +219,7 @@ const handleContact = () => {
 
 .timeline-marker {
   position: absolute;
-  left: -22px;
+  left: -29px;
   top: 6px;
   width: 12px;
   height: 12px;

@@ -40,6 +40,12 @@ export const mockUserProfile: UserProfile = {
       description:
         '小規模なReactプロジェクトでUIの実装を担当。コンポーネント分割やスタイル調整を行いました。',
     },
+    {
+      title: '株式会社TKY',
+      company: '入社',
+      period: '2025年4月 - 現在',
+      description: '下流フロントエンド開発を担当しています。',
+    },
   ],
   contact: {
     email: 'lily@example.com',
