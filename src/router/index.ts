@@ -14,6 +14,11 @@ const router = createRouter({
       name: 'components',
       component: () => import('../components/pages/ComponentGallery.vue'),
     },
+    {
+      path: '/about',
+      name: 'about',
+      component: () => import('../components/pages/SelfIntroduction.vue'),
+    },
   ],
 })
 
