@@ -17,16 +17,18 @@
 
     <!-- ナビゲーション -->
     <nav class="navigation">
-      <BaseButton @click="goToComponents" variant="primary" size="large">
+      <BaseButton @click="goToAbout" variant="primary" size="large">
+        <BaseIcon icon="👤" /> 自己紹介ページへ
+      </BaseButton>
+      <BaseButton @click="goToComponents" variant="secondary" size="large">
         <BaseIcon icon="🎨" /> コンポーネントギャラリーへ
       </BaseButton>
     </nav>
 
     <!-- 開発中の機能リスト -->
     <div class="coming-soon">
-      <BaseHeading tag="h3">今後追加予定の機能</BaseHeading>
+      <BaseHeading tag="h3" align="center" :noMargin="true">今後追加予定の機能</BaseHeading>
       <div class="feature-list">
-        <BaseTag variant="info" size="medium"> <BaseIcon icon="👤" /> 自己紹介ページ </BaseTag>
         <BaseTag variant="info" size="medium">
           <BaseIcon icon="💼" /> 実績・ポートフォリオ
         </BaseTag>
@@ -48,6 +50,10 @@ import BaseTag from '../atoms/BaseTag.vue'
 
 const router = useRouter()
 
+const goToAbout = () => {
+  router.push('/about')
+}
+
 const goToComponents = () => {
   router.push('/components')
 }
@@ -67,6 +73,9 @@ const goToComponents = () => {
     display: flex;
     gap: 20px;
     margin-bottom: 60px;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-flow: column;
   }
 
   .coming-soon {
