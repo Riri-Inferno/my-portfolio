@@ -17,10 +17,10 @@
 
     <!-- ナビゲーション -->
     <nav class="navigation">
-      <BaseButton @click="goToAbout" variant="primary" size="large">
+      <BaseButton @click="goToAbout" variant="success" size="large">
         <BaseIcon icon="👤" /> 自己紹介ページへ
       </BaseButton>
-      <BaseButton @click="goToComponents" variant="secondary" size="large">
+      <BaseButton @click="goToComponents" variant="primary" size="large">
         <BaseIcon icon="🎨" /> コンポーネントギャラリーへ
       </BaseButton>
     </nav>
