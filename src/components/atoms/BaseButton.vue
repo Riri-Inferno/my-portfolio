@@ -26,7 +26,7 @@
 
 <script setup lang="ts">
 interface ButtonProps {
-  variant?: 'primary' | 'secondary' | 'ghost' | 'danger'
+  variant?: 'primary' | 'secondary' | 'ghost' | 'danger' | 'success' | 'warning' | 'link'
   size?: 'small' | 'medium' | 'large'
   type?: 'button' | 'submit' | 'reset'
   disabled?: boolean
@@ -78,7 +78,6 @@ const handleClick = (event: MouseEvent) => {
     padding: 6px 12px;
     font-size: 14px;
   }
-
   &--medium {
     padding: 10px 20px;
     font-size: 16px;
@@ -128,7 +127,34 @@ const handleClick = (event: MouseEvent) => {
     }
   }
 
-  // 状態スタイル
+  &--success {
+    background-color: #00c72e;
+    color: white;
+    &:hover:not(:disabled) {
+      background-color: #218838;
+    }
+  }
+
+  &--warning {
+    background-color: #ffc107;
+    color: black;
+    &:hover:not(:disabled) {
+      background-color: #e0a800;
+    }
+  }
+
+  &--link {
+    background: none;
+    color: #007bff;
+    padding: 0;
+    border-radius: 0;
+    text-decoration: underline;
+    &:hover:not(:disabled) {
+      color: #0056b3;
+    }
+  }
+
+  // 状態
   &--disabled {
     opacity: 0.5;
     cursor: not-allowed;
