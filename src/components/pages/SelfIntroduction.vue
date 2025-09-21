@@ -144,7 +144,7 @@ import { useProfile } from '@/composables/pages/useProfile'
 const { profileData, isLoading, error } = useProfile()
 
 // フェイクプロフィールフラグ
-const isFakeProfile = ref(false)
+const isFakeProfile = ref(true)
 
 // 現在表示するプロフィール
 const currentProfile = computed(() => {
